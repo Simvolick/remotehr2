@@ -2,11 +2,13 @@ import NextAuth, { type NextAuthOptions } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 import EmailProvider from "next-auth/providers/email";
 import YandexProvider from "next-auth/providers/yandex";
+// import VkProvider from "next-auth/providers/vk";
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db/client";
+import { string } from "zod";
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
@@ -32,10 +34,16 @@ export const authOptions: NextAuthOptions = {
       },
       from: process.env.EMAIL_FROM
     }),
+    //VkProvider not working because of the strict typescript
+
+    // VkProvider({
+    //   clientId: process.env.VK_CLIENT_ID,
+    //   clientSecret: process.env.VK_CLIENT_SECRET
+    // }),
     YandexProvider({
       clientId: process.env.YANDEX_CLIENT_ID,
       clientSecret: process.env.YANDEX_CLIENT_SECRET
-    })
+    }),
     // DiscordProvider({
     //   clientId: env.DISCORD_CLIENT_ID,
     //   clientSecret: env.DISCORD_CLIENT_SECRET,
@@ -43,5 +51,6 @@ export const authOptions: NextAuthOptions = {
     // ...add more providers here
   ],
 };
+
 
 export default NextAuth(authOptions);
