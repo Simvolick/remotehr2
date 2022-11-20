@@ -10,6 +10,8 @@ import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db/client";
 import { string } from "zod";
 
+
+
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
@@ -50,6 +52,9 @@ export const authOptions: NextAuthOptions = {
     // }),
     // ...add more providers here
   ],
+  pages: {
+    signIn: "/signin",
+    },
 };
 
 
