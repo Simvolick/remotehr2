@@ -9,8 +9,8 @@ import { useState } from "react";
 import Image from "next/image";
 
 export default function SignIn({
-                                                                                                                                                                                                                                                                      providers,
-                                                                                                                                                                                                                                                                    }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+                                                                                                                                                                                                                                                                          providers,
+                                                                                                                                                                                                                                                                        }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   console.log(providers);
 
   const [email, setEmail] = useState("");
@@ -77,6 +77,7 @@ export default function SignIn({
 }
 
 export async function getServerSideProps(context: any) {
+
   const { req } = context;
   const session = await getSession({ req });
 
