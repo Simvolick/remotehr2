@@ -40,12 +40,16 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(cuid())
+  id           String   @id @default(cuid()) 
   sessionToken String   @unique
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+// update User for Job posting
+
+
 
 model User {
   id            String    @id @default(cuid())
@@ -55,6 +59,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  jobs          JobPosting[]
 }
 
 model VerificationToken {
@@ -67,17 +72,19 @@ model VerificationToken {
 
 // Job posting model 
 
-// model JobPosting {
-//   id        String   @id @default(cuid())
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//   title     String
-//   company   String
-//   location  String
-//   url       String
-//   email     String
-//   notes     String
-//   status    String
-//   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-//   userId    String
-// }
+model JobPosting {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String
+  company   String
+  url       String
+  email     String
+  phone     String?
+  location  String
+  salary    String
+  description String
+  notes     String?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+}
