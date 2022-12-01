@@ -7,7 +7,7 @@ import { trpc } from "../utils/trpc";
 import LoginBtn from "../components/LoginBtn";
 
 const Home: NextPage = (props) => {
-  const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
+  const hello = trpc.example.hello.useQuery({ text: "from tRPC and Klim" });
 
   return (
     <>
@@ -48,6 +48,8 @@ const Home: NextPage = (props) => {
               {hello.data ? hello.data.greeting : "Loading tRPC query..."}
             </p>
             <AuthShowcase />
+            <p>BREAK</p>
+            <JobsShowcase />
           </div>
         </div>
       </main>
@@ -56,6 +58,35 @@ const Home: NextPage = (props) => {
 };
 
 export default Home;
+
+
+const JobsShowcase: React.FC = () => {
+  const { data: sessionData } = useSession();
+
+  const { data: jobsData } = trpc.jobs.getAll.useQuery();
+
+  return (
+    <div className="flex flex-col items-center justify-center gap-4">
+      <p className="text-center text-2xl text-white">
+         {/* create a display for jobsData */}
+
+        {jobsData?.map((job) => (
+          <div key={job.id}>
+            <h3 className="text-3xl">By: {job.company}</h3>
+            <h3>{job.title}</h3>
+            <p>{job.description}</p>
+            <p>{job.location}</p>
+            <p>{job.salary}</p>
+            <p>{job.description}</p>
+            <p>{job.notes}</p>
+          </div>
+        ))}
+
+      </p>
+    </div>
+  );
+};
+
 
 const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();
