@@ -67,6 +67,7 @@ const AuthShowcase: React.FC = () => {
 
   const { data: notSecretMessage } = trpc.auth.getNotSecretMessage.useQuery(
     undefined, // no input
+    {},
   );
 
   return (
