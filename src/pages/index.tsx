@@ -61,19 +61,20 @@ export default Home;
 
 
 const JobsShowcase: React.FC = () => {
-  const { data: sessionData } = useSession();
 
   const { data: jobsData } = trpc.jobs.getAll.useQuery();
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
+    <div className="">
+      <div className="text-2xl text-white">
          {/* create a display for jobsData */}
 
         {jobsData?.map((job) => (
           <div key={job.id}>
-            <h3 className="text-3xl">By: {job.company}</h3>
+            
             <h3>{job.title}</h3>
+            <h3 className="text-3xl">By: {job.company}</h3>
+
             <p>{job.description}</p>
             <p>{job.location}</p>
             <p>{job.salary}</p>
@@ -82,7 +83,7 @@ const JobsShowcase: React.FC = () => {
           </div>
         ))}
 
-      </p>
+      </div>
     </div>
   );
 };
