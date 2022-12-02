@@ -76,9 +76,11 @@ model JobPosting {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   companyName   String
-  companyImage String?
+  companyImage String
   position     String
   ocupationType String
+  positionMainTag String
+  positionAllTags String
   url       String
   email     String
   phone     String?
