@@ -59,7 +59,6 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  jobs          JobPosting[]
 }
 
 model VerificationToken {
@@ -76,8 +75,10 @@ model JobPosting {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  title     String
-  company   String
+  companyName   String
+  companyImage String?
+  position     String
+  ocupationType String
   url       String
   email     String
   phone     String?
@@ -85,6 +86,4 @@ model JobPosting {
   salary    String
   description String
   notes     String?
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
 }
