@@ -72,20 +72,33 @@ model VerificationToken {
 // Job posting model 
 
 model JobPosting {
-  id        String   @id @default(cuid())
+  jobId        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   companyName   String
   companyImage String
   position     String
   ocupationType String
-  positionMainTag String
-  positionAllTags String
+  proffesionType String
+  positionAllTags Tag[]
   url       String
   email     String
   phone     String?
   location  String
-  salary    String
-  description String
+  salary    String?
+  salaryMin String
+  salaryMax String
+  benefits  String?
+  jobDescription String
+  applyDescription String
+  applyUrl String
   notes     String?
+  // jobPostPayedOptions String
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  tag       String
+  tagType   String
+  jobPosting JobPosting[]
 }
